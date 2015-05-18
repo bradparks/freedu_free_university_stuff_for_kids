@@ -1,0 +1,20 @@
+{
+  "all": {
+    "free": {
+      "Amazon Prime": {
+        "duration": "1 year",
+        "url": "http://www.amazon.com/b/ref=tb_surl_astudent/?node=668781011"
+      }
+    },
+    "discount": {
+      "Spotify Premium":{
+        "duration": "na",
+        "url": "https://www.spotify.com/us/student/"
+      }
+    }
+  },
+  "William & Mary": {
+    "free": {},
+    "discount": {}
+  }
+}
