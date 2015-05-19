@@ -3,7 +3,7 @@ var React = require('react'),
 
 var schools = [];
 var req = new XMLHttpRequest();
-req.open('GET', '/data/schools.json', false);
+req.open('GET', '/freedu/data/schools.json', false);
 req.send(null);
 if (req.status === 200) schools = JSON.parse(req.responseText);
 
