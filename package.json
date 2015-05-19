@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "build": "browserify ./index.js | uglify -c -m > build/bundle.js",
+    "build": "browserify ./index.js | uglifyjs -c -m > build/bundle.js",
     "start": "budo ./index.js --serve=build/bundle.js --live -d"
   },
   "repository": {

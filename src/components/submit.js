@@ -34,14 +34,20 @@ var Submit = React.createClass({
   },
   render() {
     return (
-      <div>
-        <select onChange={this.selectSchool}>
-          {schools.map(s => { return <option value={s}>{s}</option> })}
-        </select>
-        <input type='text' onChange={this.updateService} placeholder='Service' />
-        <input type='text' onChange={this.updateDuration} placeholder='Duration' />
-        <input type='text' onChange={this.updateLink} placeholder='Link' />
-        <input type='submit' onClick={this.submit} />
+      <div id='submit'>
+        <legend>Submit</legend>
+        <form>
+          <select onChange={this.selectSchool}>
+            {schools.map(s => { return <option value={s}>{s}</option> })}
+          </select><br/>
+          <label>Service: </label>
+          <input type='text' onChange={this.updateService} placeholder='Service' /><br/>
+          <label>Duration: </label>
+          <input type='text' onChange={this.updateDuration} placeholder='Duration' /><br/>
+          <label>Link: </label>
+          <input type='text' onChange={this.updateLink} placeholder='Link' /><br/>
+          <input type='submit' onClick={this.submit} />
+        </form>
       </div>
     );
   }

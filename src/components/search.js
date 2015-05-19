@@ -8,8 +8,8 @@ var Search = React.createClass({
   },
   render() {
     return (
-      <div>
-        <input type='text' onChange={this.search} placeholder='search' />
+      <div id='search-container'>
+        <input id='search' type='text' onChange={this.search} placeholder='search by school or by service' />
       </div>
     );
   }

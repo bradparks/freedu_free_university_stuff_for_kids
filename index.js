@@ -5,6 +5,6 @@ var React = require('react'),
 var App = require('./src/app');
 
 var routes = (
-  <Route handler={App}>
+  <Route path='/' handler={App}>
   </Route>
 );

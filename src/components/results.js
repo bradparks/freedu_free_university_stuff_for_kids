@@ -3,13 +3,46 @@ var React = require('react');
 var DataStore = require('../stores/data_store');
 
 var Results = React.createClass({
+  mixins: [DataStore.listenTo],
   getInitialState() {
     return { results: DataStore.getResults() };
   },
+  _onChange() {
+    console.log('updating')
+    this.setState({ results: DataStore.getResults() });
+  },
   render() {
+    var results = this.state.results;
     return (
       <div>
-        {JSON.stringify(this.state.results, null, 2)}
+        <div>
+          {Object.keys(results).map(o => {
+            var cats = results[o];
+            return (
+              <div>
+                <h1 style={{textAlign: 'center'}}>{o}</h1>
+                <div>
+                  {Object.keys(cats).map(c => {
+                    var prods = cats[c]
+                    return (
+                      <div>
+                        <h3>{c}</h3>
+                        {Object.keys(prods).map(p => {
+                          return (
+                            <div>
+                              <a href={prods[p].url}>{p}</a>
+                              <p>Duration: {prods[p].duration}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -17,9 +50,16 @@ var Results = React.createClass({
 
 var Section = React.createClass({
   render() {
+    console.log(JSON.stringify(this.props.content, null, 2))
+    var content = this.props.content
+    if (!!(''+content.free)) {
+      console.log(content.free)
+    }
+    if (!!(''+content.discount)) {
+      console.log(content.discount)
+    }
     return (
-      <div>
-        {JSON.stringify(this.props.content)}
+      <div id='results'>
       </div>
     );
   }
