@@ -3,12 +3,13 @@ var React = require('react');
 var DataStore = require('../stores/data_store');
 
 var Results = React.createClass({
-  mixins: [DataStore.listenTo],
   getInitialState() {
     return { results: DataStore.getResults() };
   },
+  componentWillMount() {
+    DataStore.addChangeListener(this._onChange);
+  },
   _onChange() {
-    console.log('updating')
     this.setState({ results: DataStore.getResults() });
   },
   render() {
@@ -19,19 +20,19 @@ var Results = React.createClass({
           {Object.keys(results).map(o => {
             var cats = results[o];
             return (
-              <div>
-                <h1 style={{textAlign: 'center'}}>{o}</h1>
+              <div className='section'>
+                <h1 className='section-name'>{o}</h1>
                 <div>
                   {Object.keys(cats).map(c => {
                     var prods = cats[c]
                     return (
                       <div>
-                        <h3>{c}</h3>
+                        <h3 className='price'>{c}</h3>
                         {Object.keys(prods).map(p => {
                           return (
                             <div>
-                              <a href={prods[p].url}>{p}</a>
-                              <p>Duration: {prods[p].duration}</p>
+                              <a className='product' href={prods[p].url}>{p}</a>
+                              <p className='duration'>Duration: {prods[p].duration}</p>
                             </div>
                           );
                         })}

@@ -7,7 +7,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 var data;
 
 var req = new XMLHttpRequest();
-req.open('GET', 'https://raw.githubusercontent.com/kelvinabrokwa/freedu/gh-pages/data/data.json', false);
+req.open('GET', '/data/data.json', false);
 req.send(null);
 if (req.status === 200) {
   data = JSON.parse(req.responseText);
@@ -18,7 +18,7 @@ var filtered = data;
 function search(input) {
   var out = {};
   for (var key in data) {
-    if (key.indexOf(input) > - 1) {
+    if (key.toLowerCase().indexOf(input.toLowerCase()) > -1) {
       out[key] = data[key];
       continue;
     }
@@ -28,7 +28,8 @@ function search(input) {
 
 var CHANGE_EVENT = 'change';
 
-module.exports = xtend(EventEmitter, {
+var DataStore = xtend(EventEmitter.prototype, {
+  getResults: () => filtered,
   emitChange() {
     this.emit(CHANGE_EVENT);
   },
@@ -38,9 +39,6 @@ module.exports = xtend(EventEmitter, {
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-  getResults() {
-    return filtered;
-  },
   dispatcherIndex: Dispatcher.register(payload => {
     var action = payload.action;
     switch (action.source) {
@@ -48,5 +46,9 @@ module.exports = xtend(EventEmitter, {
         filtered = search(action.input);
         break;
     }
+    DataStore.emitChange(action.actionType);
+    return true;
   })
 });
+
+module.exports = DataStore;

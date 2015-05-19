@@ -1,4 +1,7 @@
-body, input {}
+body{
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
 
 #title {
   text-align: center;
@@ -12,13 +15,37 @@ body, input {}
   margin-bottom: 2em;
   text-align: center;
 }
-/*
-#results {
-  margin-bottom: 4em;
+
+.section {
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
 
-#submit {
-  border: solid 1px;
-  padding: 1em;  
+.section-name {
+  text-align: center;
 }
-*/
+
+.price {
+}
+.product {
+}
+
+.duration {
+  font-size: 0.1em;
+}
+
+/* Submission area */
+.submission {
+  width: 100%;
+  text-align: center;
+}
+form {
+  border: 1px solid;
+  padding: 10%;
+}
+input[type='text'] {
+  width: 40em;
+}
+select {
+  width: 40em;
+}

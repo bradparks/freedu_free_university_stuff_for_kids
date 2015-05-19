@@ -3,7 +3,7 @@ var React = require('react'),
 
 var schools = [];
 var req = new XMLHttpRequest();
-req.open('GET', 'https://raw.githubusercontent.com/kelvinabrokwa/freedu/gh-pages/data/schools.json', false);
+req.open('GET', '/data/schools.json', false);
 req.send(null);
 if (req.status === 200) schools = JSON.parse(req.responseText);
 
@@ -13,13 +13,15 @@ var Submit = React.createClass({
       school: 'all',
       service: '',
       duration: '',
-      link: ''
+      link: '',
+      price: 'free'
     };
   },
   selectSchool(e) { this.setState({ school: e.target.value }); },
   updateService(e) { this.setState({ service: e.target.value }); },
   updateDuration(e) { this.setState({ duration: e.target.value }); },
   updateLink(e) { this.setState({ link: e.target.value }); },
+  updatePrice(e) { this.setState({ price: e.target.value }); },
   submit(e) {
     e.preventDefault();
     if (!this.state.service || !this.state.link) {
@@ -35,13 +37,24 @@ var Submit = React.createClass({
   render() {
     return (
       <div>
-        <form>
+        <form className='submission'>
+          <legend>
+            <h2>Be cool, submit</h2>
+          </legend>
           <select onChange={this.selectSchool}>
             {schools.map(s => { return <option value={s}>{s}</option> })}
           </select>
-          <fieldset><input type='text' onChange={this.updateService} placeholder='Service' /></fieldset>
-          <fieldset><input type='text' onChange={this.updateDuration} placeholder='Duration' /></fieldset>
+          <br/>
+          <input type='text' onChange={this.updateService} placeholder='Service' />
+          <br/>
+          <input type='text' onChange={this.updateDuration} placeholder='Duration' />
+          <br/>
           <input type='text' onChange={this.updateLink} placeholder='Link' />
+          <br/>
+          <select>
+            {['free','discount'].map(p => {return <option value={p}>{p}</option>})}
+          </select>
+          <br/>
           <input type='submit' onClick={this.submit} />
         </form>
       </div>
