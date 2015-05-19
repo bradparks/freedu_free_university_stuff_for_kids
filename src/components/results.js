@@ -48,21 +48,4 @@ var Results = React.createClass({
   }
 });
 
-var Section = React.createClass({
-  render() {
-    console.log(JSON.stringify(this.props.content, null, 2))
-    var content = this.props.content
-    if (!!(''+content.free)) {
-      console.log(content.free)
-    }
-    if (!!(''+content.discount)) {
-      console.log(content.discount)
-    }
-    return (
-      <div id='results'>
-      </div>
-    );
-  }
-});
-
 module.exports = Results;
